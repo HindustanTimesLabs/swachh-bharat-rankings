@@ -1,0 +1,26 @@
+body {
+	font-family: "Open Sans", sans-serif;
+}
+
+#sliders-wrapper {
+	width: 100%;
+	max-width: 750px;
+	margin: 0 auto;
+	display: table;
+}
+#sliders-wrapper .slider-rect {
+	stroke: #ccc;
+	fill: #3a403d;
+}
+#sliders-wrapper .slider-text {
+	text-anchor: middle;
+}
+#sliders-wrapper .slider-circle {
+	stroke: #aaa;
+	fill: #ccc;
+	cursor: ew-resize;
+}
+#sliders-wrapper .slider-circle-text {
+	text-anchor: middle;
+	cursor: ew-resize;
+}
