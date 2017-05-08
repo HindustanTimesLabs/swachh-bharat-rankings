@@ -45,12 +45,23 @@ function ready(error, data){
 	    .attr("class", "x axis")
 	    .attr("transform", "translate(0," + height_scatter + ")")
 	    .call(xAxis_scatter)
+	  .append("text")
+	  	.attr("class", "label")
+	  	.attr("x", width_scatter)
+	  	.attr("y", -5)
+	  	.attr("text-anchor", "end")
+	   	.text("Your score");
 
 	// scatter plot, set the axes
 	svg_scatter.append("g")
 	    .attr("class", "y axis")
-	    // .attr("transform", "translate(0," + height_scatter + ")")
 	    .call(yAxis_scatter)
+	  .append("text")
+	  	.attr("class", "label")
+	  	.attr("x", 5)
+	  	.attr("y", 5)
+	  	.attr("text-anchor", "start")
+	   	.text("Government's score");
 
 	// SLIDER
 	var slider_margin = {top: 0, right: 12, bottom: 0, left: 12},
@@ -325,7 +336,8 @@ function ready(error, data){
 
 			city_dot
 				.transition(t)
-					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); });
+					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); })
+					.attr("fill", function(d){ return color_scale_scatter(d.total_pct - d.start_pct)});
 
 		} else {
 			city_label
@@ -333,7 +345,8 @@ function ready(error, data){
 					.text(function(d){ return d.rank + ". " + d.city + " (" + d.total_pct.toFixed(1) + ")"});
 
 			city_dot
-					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); });			
+					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); })
+					.attr("fill", function(d){ return color_scale_scatter(d.total_pct - d.start_pct)});
 		}
 
 		//ENTER
@@ -345,9 +358,10 @@ function ready(error, data){
 
 		city_dot.enter().append("circle")
 				.attr("class", "city-dot")
-				.attr("r", 3)
+				.attr("r", 4)
 				.attr("cx", function(d){ return xScale_scatter(d.total_pct); })
 				.attr("cy", function(d){ return yScale_scatter(d.start_pct); })
+				.attr("fill", function(d){ return color_scale_scatter(d.total_pct - d.start_pct)})
 
 				// .attr("x", function(d){ return d.})
 
