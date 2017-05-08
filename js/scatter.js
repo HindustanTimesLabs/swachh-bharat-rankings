@@ -1,7 +1,7 @@
 // magic numbers
 var margin_scatter = {top: 20, bottom: 25, left: 25, right: 10},
-	width_scatter = 500 - margin_scatter.left - margin_scatter.right,
-	height_scatter = 500 - margin_scatter.top - margin_scatter.bottom;
+	width_scatter = 450 - margin_scatter.left - margin_scatter.right,
+	height_scatter = 450 - margin_scatter.top - margin_scatter.bottom;
 
 var svg_scatter = d3.select("#chart").append("svg")
 		.attr("width", width_scatter + margin_scatter.left + margin_scatter.right)
@@ -9,7 +9,7 @@ var svg_scatter = d3.select("#chart").append("svg")
 	.append("g")
 		.attr("transform", "translate(" + margin_scatter.left + ", " + margin_scatter.top + ")");
 
-var color_scale_scatter = chroma.scale(['#e66101','#fdb863','#444','#b2abd2','#5e3c99']).domain([-10,10]);
+var color_scale_scatter = chroma.scale(['#e66101','#fdb863','#b2abd2','#5e3c99']).domain([-25, 25]);
 
 var xScale_scatter = d3.scaleLinear()
 		.range([0, width_scatter])

@@ -66,7 +66,7 @@ function ready(error, data){
 	// SLIDER
 	var slider_margin = {top: 0, right: 12, bottom: 0, left: 12},
 		slider_width = $("#sliders-wrapper").width() - slider_margin.left - slider_margin.right,
-		slider_height = 40 - slider_margin.top - slider_margin.bottom,
+		slider_height = 20 - slider_margin.top - slider_margin.bottom,
 		slider_handle_width = 10;
 
 	var svg_slider = d3.select("#sliders-wrapper").append("svg")
@@ -109,7 +109,7 @@ function ready(error, data){
 			slider_bar_text
 				.transition(t)
 					.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
-					.text(function(d){ return d.value + "%" });
+					.text(function(d){ return d.value <= 5 ? "" : d.value + "%" });
 
 		} else {
 
@@ -122,7 +122,7 @@ function ready(error, data){
 
 			slider_bar_text
 					.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
-					.text(function(d){ return d.value + "%" });
+					.text(function(d){ return d.value <= 5 ? "" : d.value + "%" });
 
 		}
 		
@@ -146,7 +146,8 @@ function ready(error, data){
 				.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
 				.attr("dy", ".4em")
 				.attr("y", slider_height / 2)
-				.text(function(d){ return d.value + "%" })
+				.text(function(d){ return d.value <= 5 ? "" : d.value + "%" })
+				// .call(d3.drag().on("drag", dragged));
 
 	}
 

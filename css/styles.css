@@ -124,7 +124,8 @@ body {
 	cursor: ew-resize;
 }
 #sliders-wrapper .slider-bar-text {
-	text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+	fill: #fff;
+	/*text-shadow: -1px -1px 1px #888, -1px 0px 1px #888, -1px 1px 1px #888, 0px -1px 1px #888, 0px 1px 1px #888, 1px -1px 1px #888, 1px 0px 1px #888, 1px 1px 1px #888;*/
 	text-anchor: middle;
 }
 
@@ -148,4 +149,17 @@ body {
 .axis .label {
 	fill: #000;
 	font-size: 1.5em;
+}
+.legend {
+	font-size: .8em;
+/*	color: #888;*/
+}
+.legend .legend-item {
+	display: inline-block;
+	margin-right: 10px;
+}
+.legend .legend-item .swatch {
+	height: 10px;
+	width: 25px;
+	display: inline-block;
 }
