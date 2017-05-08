@@ -3,7 +3,7 @@ var margin = {top: 20, bottom: 10, left: 10, right: 10},
 	width = 600 - margin.left - margin.right,
 	height = 10000 - margin.top - margin.bottom;
 
-var svg = d3.select("#chart").append("svg")
+var svg_table = d3.select("#table").append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
 	.append("g")
@@ -14,7 +14,7 @@ var yScale = d3.scaleLinear()
 		.rangeRound([0, height]);
 
 var t = d3.transition()
-		.duration(1000);
+		.duration(2000);
 
 d3.queue()
 	.defer(d3.csv, "data/data.csv")
@@ -27,87 +27,138 @@ function ready(error, data){
 	{
 		id: "dox",
 		name: "Documentation",
-		value: 90
+		value: 45
 	},
 	{
 		id: "ground",
 		name: "Ground assessment",
-		value: 50
+		value: 25
 	},
 	{
 		id: "citizen",
 		name: "Citizen reports",
-		value: 60
+		value: 30
 	}];
 
-	var sliders_wrapper_width = $("#sliders-wrapper").width(),
-		sliders_wrapper_height = 80,
-		slider_height = 20,
-		slider_wrapper_width = sliders_wrapper_width / sliders.length,
-		slider_circle_radius = 20,
-		slider_shrink = .8,
-		slider_shrink_left = (1 - slider_shrink) / 2,
-		slider_shrink_right = slider_shrink + slider_shrink_left,
-		slider_width = slider_wrapper_width * slider_shrink,
-		slider_padding_left = slider_wrapper_width * slider_shrink_left,
-		slider_padding_right = slider_wrapper_width * slider_shrink_right;
+	// scatter plot, set the axes
+	svg_scatter.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height_scatter + ")")
+	    .call(xAxis_scatter)
+
+	// scatter plot, set the axes
+	svg_scatter.append("g")
+	    .attr("class", "y axis")
+	    // .attr("transform", "translate(0," + height_scatter + ")")
+	    .call(yAxis_scatter)
+
+	// SLIDER
+	var slider_margin = {top: 0, right: 12, bottom: 0, left: 12},
+		slider_width = $("#sliders-wrapper").width() - slider_margin.left - slider_margin.right,
+		slider_height = 40 - slider_margin.top - slider_margin.bottom,
+		slider_handle_width = 10;
+
+	var svg_slider = d3.select("#sliders-wrapper").append("svg")
+			.attr("width", slider_width + slider_margin.left + slider_margin.right)
+			.attr("height", slider_height + slider_margin.top + slider_margin.bottom)
+		.append("g")
+			.attr("transform", "translate(" + slider_margin.left + "," + slider_margin.top + ")");
 
 	var slider_scale = d3.scaleLinear()
-			.range([slider_padding_left, slider_padding_right])
-			.domain([0, 100]);
-
-	var sliders_wrapper = d3.select("#sliders-wrapper")
-			.attr("width", sliders_wrapper_width)
-			.attr("height", sliders_wrapper_height);
-
-	var sw_g_group = [];
-
-	var slider_text = sliders_wrapper.selectAll(".slider-text")
-			.data(sliders)
-		.enter().append("text")
-			.attr("class", "slider-text")
-			.attr("x", function(d, i){ return (slider_wrapper_width * i) + (slider_wrapper_width / 2); })
-			.attr("y", 0)
-			.attr("dy", ".8em")
-			.text(function(d){ return d.name; });
-
-	sliders_wrapper.selectAll(".slider-rect")
-			.data(sliders)
-		.enter().append("rect")
-			.attr("class", "slider-rect")
-			.attr("x", function(d, i){ return (slider_wrapper_width * i) + slider_padding_left; })
-			.attr("y", (sliders_wrapper_height - slider_height) / 2)
-			.attr("width", slider_width)
-			.attr("height", slider_height)
-			.attr("rx", 10)
-			.attr("ry", 10);
-
-	var slider_circle = sliders_wrapper.selectAll(".slider-circle")
-			.data(sliders)
+			.range([0, slider_width])
+			.domain([0, 100])
 	
-	slider_circle
-			.attr("cx", function(d, i){ return slider_scale(d.value) + (slider_wrapper_width * i); })
+	var colors = ["#334d5c","#45b29d","#df5a49"]
 
-	slider_circle.enter().append("circle")
-			.attr("class", function(d){ return "slider-circle " + d.id; })
-			.attr("cx", function(d, i){ return slider_scale(d.value) + (slider_wrapper_width * i); })
-			.attr("cy", ((sliders_wrapper_height - slider_height) / 2) + (slider_circle_radius / 2))
-			.attr("r", slider_circle_radius)
-			.call(d3.drag().on("drag", dragged));
+	function draw_slider_bars(sliders, transition){
 
-	var slider_circle_text = sliders_wrapper.selectAll(".slider-circle-text")
-			.data(sliders)
-	
-	slider_circle_text
-			.attr("x", function(d, i){ return slider_scale(d.value) + (slider_wrapper_width * i); });
+		// JOIN
+		var slider_bar = svg_slider.selectAll(".slider-bar")
+				.data(sliders, function(d){ return d.id; });
+		
+		var slider_handle = svg_slider.selectAll(".slider-handle")
+				.data(sliders, function(d){ return d.id; });
 
-	slider_circle_text.enter().append("text")
-			.attr("class", function(d){ return "slider-circle-text " + d.id; })
-			.attr("x", function(d, i){ return slider_scale(d.value) + (slider_wrapper_width * i); })
-			.attr("y", ((sliders_wrapper_height - slider_height) / 2) + (slider_circle_radius / 2))
-			.attr("dy", ".3em")
-			.text(function(d){ return d.value; })
-			.call(d3.drag().on("drag", dragged));
+		var slider_bar_text = svg_slider.selectAll(".slider-bar-text")
+				.data(sliders, function(d){ return d.id; })
+
+
+		// UPDATE
+		if (transition){
+
+			slider_bar
+				.transition(t)
+					.attr("width", function(d){ return slider_scale(d.value); })
+					.attr("x", function(d, i){ return slider_scale(compute_offset(d, i)); })
+			
+			slider_handle
+				.transition(t)
+					.attr("x", function(d,i){ return i != 0 ? slider_scale(compute_offset(d,i)) - (slider_handle_width / 2) : -10000000; })
+
+			slider_bar_text
+				.transition(t)
+					.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
+					.text(function(d){ return d.value + "%" });
+
+		} else {
+
+			slider_bar
+					.attr("width", function(d){ return slider_scale(d.value); })
+					.attr("x", function(d, i){ return slider_scale(compute_offset(d, i)); })
+
+			slider_handle
+					.attr("x", function(d,i){ return i != 0 ? slider_scale(compute_offset(d,i)) - (slider_handle_width / 2) : -10000000; })
+
+			slider_bar_text
+					.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
+					.text(function(d){ return d.value + "%" });
+
+		}
+		
+		// ENTER
+		slider_bar.enter().append("rect")
+				.attr("class", "slider-bar")
+				.attr("width", function(d){ return slider_scale(d.value); })
+				.attr("height", slider_height)
+				.attr("x", function(d, i){ return slider_scale(compute_offset(d, i)); })
+				.attr("fill", function(d, i){ return colors[i]});
+
+		slider_handle.enter().append("rect")
+				.attr("class", function(d){ return "slider-handle " + d.id })
+				.attr("width", slider_handle_width)
+				.attr("height", slider_height)
+				.attr("x", function(d,i){ return i != 0 ? slider_scale(compute_offset(d,i)) - (slider_handle_width / 2) : -10000000; })
+				.call(d3.drag().on("drag", dragged));
+
+		slider_bar_text.enter().append("text")
+				.attr("class", "slider-bar-text")
+				.attr("x", function(d, i){ return compute_text_offset(d, i, sliders); })
+				.attr("dy", ".4em")
+				.attr("y", slider_height / 2)
+				.text(function(d){ return d.value + "%" })
+
+	}
+
+	draw_slider_bars(sliders, false);
+
+	function compute_offset(d, i){
+		var arr = [];
+		for (var i0 = 0; i0 < i; i0++){
+			arr.push(sliders[i0].value)
+		}
+		return d3.sum(arr);
+	}
+
+	function compute_text_offset(d, i, data){
+		// console.log(data);
+		if (i == 0){
+			return slider_scale(d.value / 2);
+		} else if (i == 1){
+			return slider_scale(data[i - 1].value) + slider_scale(d.value / 2);
+		} else if (i == 2){
+			return slider_scale(data[i- 1].value) + slider_scale(data[i - 2].value) + slider_scale(d.value / 2);
+		}
+	}
 
 	// convert to numbers
 	data.forEach(types);
@@ -116,16 +167,19 @@ function ready(error, data){
 		d.ground = +d.ground;
 		d.citizen = +d.citizen;
 		d.rank = +d.rank;
+		d.start_pct = +d.start_pct;
+		d.start_rank = +d.start_rank;
 		return d;
 	}
 
 	// set the y domain
 	yScale.domain(d3.extent(data, function(d){ return d.rank; }));
 
-	function update_data(){
-		var val_dox = +$(".slider-circle-text.dox").text(),
-			val_ground = +$(".slider-circle-text.ground").text(),
-			val_citizen = +$(".slider-circle-text.citizen").text();
+	function update_data(sliders){
+
+		var val_dox = sliders[0].value,
+			val_ground = sliders[1].value,
+			val_citizen = sliders[2].value;
 
 		// calculate the new score
 		data.forEach(calc_total_score);
@@ -136,10 +190,6 @@ function ready(error, data){
 			return d;
 		}
 
-		$(".slider-dox .slider-value").html(val_dox);
-		$(".slider-ground .slider-value").html(val_ground);
-		$(".slider-citizen .slider-value").html(val_citizen);
-	
 		// update the rank
 		data = _.sortBy(data, "total_score").reverse();
 	
@@ -151,53 +201,113 @@ function ready(error, data){
 		return data;
 	}
 	
-	reorder(update_data());
+	reorder(update_data(sliders), false);
 
+	function compute_slider_values(d, i, val){
+
+		if (d.id == "ground"){
+			sliders[0].value = val;
+			sliders[1].value = 100 - val - sliders[2].value;
+		} else {
+			sliders[1].value = val - sliders[0].value;
+			sliders[2].value = 100 - val;
+		}
+
+		draw_slider_bars(sliders, false);
+	}
+
+	// what happens you when drag shit
 	function dragged(d, i){
+
+		$(".button").removeClass("active");
 
 	  var x = d3.mouse(this)[0];
 
-	  var min_x = slider_scale(0) + slider_wrapper_width * i;
-	  var max_x = slider_scale(100) + slider_wrapper_width * i;
+	  var slider_name = i == 1 ? "left" : "right";
+
+	  var min_x = slider_name == "left" ? slider_scale(0) : slider_scale(sliders[0].value);
+	  var max_x = slider_name == "left" ? slider_scale(100 - sliders[2].value) : slider_scale(100);
 
 	  x = x <= min_x ? min_x : x >= max_x ? max_x : x;
 
-	  var val = Math.round(slider_scale.invert(x - slider_wrapper_width * i));
+	  var val = Math.round(slider_scale.invert(x));
 
-	  sliders_wrapper.select(".slider-circle." + d.id)
-	      .attr("cx", x);
+	  // recompute those values
+	  compute_slider_values(d, i, val);
 
-	  sliders_wrapper.select(".slider-circle-text." + d.id)
-	  		.attr("x", x)
-	  		.text(val);
+	  svg_slider.select(".slider-handle." + d.id)
+	  		.attr("x", x - slider_handle_width / 2)
 
-	  reorder(update_data());
+	  reorder(update_data(sliders), false);
 
 	}
 
-	$(".reset-button").click(function(){
+	var buttons = {
+		"reset": [45,25,30],
+		"dox": [100, 0, 0],
+		"ground": [0, 100, 0],
+		"citizen": [0, 0, 100],
+		"equal": [33,34,33]
+	}
+
+	$(".button").click(function(){
+
+		$(".button").removeClass("active");
+		$(this).addClass("active");
+
+		var button_name = $(this).attr("data-button")
 		
-		sliders.forEach(function(d, i){
+		if (button_name == "dox"){
+			d3.select(".slider-handle.ground").moveToFront();
+			d3.selectAll(".slider-bar-text").moveToFront();
+		} else if (button_name == "citizen"){
+			d3.select(".slider-handle.citizen").moveToFront();
+			d3.selectAll(".slider-bar-text").moveToFront();
+		}
 
-			console.log(d);
+		buttons[button_name].forEach(function(d, i){
+			sliders[i].value = d;			
+		});
 
-			sliders_wrapper.select(".slider-circle." + d.id)
-	      .attr("cx", slider_scale(d.value) + (slider_wrapper_width * i))
+		draw_slider_bars(sliders, true);
 
-	  	sliders_wrapper.select(".slider-circle-text." + d.id)
-	  		.attr("x", slider_scale(d.value) + (slider_wrapper_width * i))
-	  		.text(d.value);
-
-		})
-
-		reorder(update_data());
+		reorder(update_data(sliders), true);
 	});
 
+	function calc_percentages(){
 
-	function reorder(data){
+		var arr =  [
+			{
+				id: "dox",
+				val: +$(".slider-circle-text.dox").text()
+			},
+			{
+				id: "ground",
+				val: +$(".slider-circle-text.ground").text()
+			},
+			{
+				id: "citizen",
+				val: +$(".slider-circle-text.citizen").text()
+			}
+		];
+
+		var sum = d3.sum(arr, function(d){ return d.val; })
+
+		arr.forEach(function(d){
+			d.pct = Math.round(d.val / sum * 100);
+			return d;
+		});
+
+		return arr;
+	}
+
+	function reorder(data, transition){
 
 		//JOIN
-		var city_label = svg.selectAll(".city-label")
+		var city_label = svg_table.selectAll(".city-label")
+				.data(data, function(d){ return d.city; });
+
+		var city_dot = svg_scatter.selectAll(".city-dot")
 				.data(data, function(d){ return d.city; });
 
 		//EXIT
@@ -207,10 +317,24 @@ function ready(error, data){
 				.remove();
 
 		//UPDATE
-		city_label
-			// .transition(t)
-				.attr("y", function(d){ return yScale(d.rank)})
-				.text(function(d){ return d.rank + ". " + d.city + " (" + d.total_pct.toFixed(1) + ")"});
+		if (transition){
+			city_label
+				.transition(t)
+					.attr("y", function(d){ return yScale(d.rank)})
+					.text(function(d){ return d.rank + ". " + d.city + " (" + d.total_pct.toFixed(1) + ")"});
+
+			city_dot
+				.transition(t)
+					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); });
+
+		} else {
+			city_label
+					.attr("y", function(d){ return yScale(d.rank)})
+					.text(function(d){ return d.rank + ". " + d.city + " (" + d.total_pct.toFixed(1) + ")"});
+
+			city_dot
+					.attr("cx", function(d,){ return xScale_scatter(d.total_pct); });			
+		}
 
 		//ENTER
 		city_label.enter().append("text")
@@ -218,6 +342,14 @@ function ready(error, data){
 				.attr("x", 0)
 				.attr("y", function(d){ return yScale(d.rank)})
 				.text(function(d){ return d.rank + ". " + d.city + " (" + d.total_pct.toFixed(1) + ")"});
+
+		city_dot.enter().append("circle")
+				.attr("class", "city-dot")
+				.attr("r", 3)
+				.attr("cx", function(d){ return xScale_scatter(d.total_pct); })
+				.attr("cy", function(d){ return yScale_scatter(d.start_pct); })
+
+				// .attr("x", function(d){ return d.})
 
 
 	}

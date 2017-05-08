@@ -2,18 +2,105 @@ body {
 	font-family: "Open Sans", sans-serif;
 }
 
+.presets {
+	height: 60px;
+	text-align: center;
+	font-size: .8em;
+}
+.presets .button {
+	display: inline-block;
+	border-radius: 5px;
+	margin-right: 10px;
+	border: 1px solid #3a403d;
+	padding: 10px;
+	background: #eee;
+	cursor: pointer;
+}
+
+.presets .button.dox {
+	color: #334d5c;
+}
+.presets .button.ground {
+	color: #45b29d;
+}
+.presets .button.citizen {
+	color: #df5a49;
+}
+.presets .button:hover {
+	background: #000;
+}
+.presets .button.dox:hover {
+	background: #334d5c;
+}
+.presets .button.ground:hover {
+	background: #45b29d;
+}
+.presets .button.citizen:hover {
+	background: #df5a49;
+}
+.presets .button:hover {
+	color: #fff;
+}
+.presets .button.active {
+	cursor: default;
+	background: #000;
+}
+.presets .button.dox.active {
+	background: #334d5c;
+}
+.presets .button.ground.active {
+	background: #45b29d;
+}
+.presets .button.citizen.active {
+	background: #df5a49;
+}
+.presets .button.active {
+	color: #fff;
+}
+
+
 #sliders-wrapper {
 	width: 100%;
 	max-width: 750px;
 	margin: 0 auto;
 	display: table;
+	margin-bottom: 10px;
 }
+
+.instructions {
+	font-size: .9em;
+	/*color: #555;*/
+	text-align: center;
+	margin-bottom: 5px;
+}
+#sliders-wrapper .labels {
+	margin-left: 12px;
+	margin-right: -10px;
+}
+#sliders-wrapper .labels .label {
+	display: inline-block;
+	width: 32%;
+	font-weight: bold;
+}
+#sliders-wrapper .labels .label.dox {
+	color: #334d5c;
+}
+#sliders-wrapper .labels .label.ground {
+	color: #45b29d;
+	text-align: center;
+}
+#sliders-wrapper .labels .label.citizen {
+	color: #df5a49;
+	text-align: right;
+}
+
 #sliders-wrapper .slider-rect {
 	stroke: #ccc;
 	fill: #3a403d;
 }
 #sliders-wrapper .slider-text {
 	text-anchor: middle;
+
 }
 #sliders-wrapper .slider-circle {
 	stroke: #aaa;
@@ -23,4 +110,30 @@ body {
 #sliders-wrapper .slider-circle-text {
 	text-anchor: middle;
 	cursor: ew-resize;
+	display: none;
+}
+#sliders-pct .slider-pct {
+	width: 33.333333%;
+	float: left;
+	text-align: center;
+	font-size: 2em;
+}
+#sliders-wrapper .slider-handle {
+	fill: #fff;
+	stroke: #000;
+	cursor: ew-resize;
+}
+#sliders-wrapper .slider-bar-text {
+	text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+	text-anchor: middle;
+}
+
+#table {
+	float: left;
+	width: 50%;
+}
+
+#chart {
+	float: left;
+	width: 50%;
 }

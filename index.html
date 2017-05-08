@@ -6,13 +6,33 @@
 	<link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-<div class="button reset-button">RESET</div>
-<svg id="sliders-wrapper"></svg>
-<div id="chart"></div>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="js/scripts.js"></script>
+	<div id="sliders-wrapper">
+		<div class="instructions">Use the white handles to adjust the weights.</div>
+		<div class="labels">
+			<div class="label dox">Documentation</div>
+			<div class="label ground">Ground assessment</div>
+			<div class="label citizen">Citizen feedback</div>
+		</div>
+	</div>
+	<div class="or instructions">Or, use these buttons.</div>
+	<div class="presets">
+
+		<div class="button" data-button="reset">Reset</div>
+		<div class="button special dox" data-button="dox">Documentation only</div>
+		<div class="button special ground" data-button="ground">Ground assessment only</div>
+		<div class="button special citizen" data-button="citizen">Citizen feedback only</div>
+		<div class="button" data-button="equal">Equal of all three</div>
+	</div>
+	<div id="table"></div>
+	<div id="chart"></div>
+
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="http://www.hindustantimes.com/static/common/js/d3.moveto.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="js/scatter.js"></script>
+	<script src="js/scripts.js"></script>
+
 </body>
 </html>
