@@ -12,6 +12,7 @@ if (ww <= 768){
 	$(".button.special.ground").text("Assessment");
 	$(".button.special.citizen").text("Citizens");
 	$(".button.equal").text("Equal");
+	$(".hover-tap").text("Tap");
 
 } else {
 	resp.slider_margin_horizontal = 12;
@@ -24,6 +25,7 @@ if (ww <= 768){
 	$(".button.special.ground").text("Ground assessment only");
 	$(".button.special.citizen").text("Citizen feedback only");
 	$(".button.equal").text("All three are equal");
+	$(".hover-tap").text("Hover over");
 }
 
 var sliders = [
