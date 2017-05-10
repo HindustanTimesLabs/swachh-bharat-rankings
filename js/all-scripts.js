@@ -1,3 +1,112 @@
+var ww = $(window).width(),
+	resp = {};
+
+if (ww <= 768){
+	resp.slider_margin_horizontal = 5;
+	resp.slider_height = 30;
+	resp.slider_handle_width = 20;
+	resp.slider_text_disappear = 10;
+	resp.empty_option = "-- Select a city --";
+
+	$(".button.special.dox").text("Documentation");
+	$(".button.special.ground").text("Assessment");
+	$(".button.special.citizen").text("Citizens");
+	$(".button.equal").text("Equal");
+
+} else {
+	resp.slider_margin_horizontal = 12;
+	resp.slider_height = 20;
+	resp.slider_handle_width = 10;
+	resp.slider_text_disappear = 5;
+	resp.empty_option = "";
+
+	$(".button.special.dox").text("Documentation only");
+	$(".button.special.ground").text("Ground assessment only");
+	$(".button.special.citizen").text("Citizen feedback only");
+	$(".button.equal").text("All three are equal");
+}
+
+var sliders = [
+{
+	id: "dox",
+	name: "Documentation",
+	value: 45
+},
+{
+	id: "ground",
+	name: "Ground assessment",
+	value: 25
+},
+{
+	id: "citizen",
+	name: "Citizen reports",
+	value: 30
+}];
+
+var slider_margin = {top: 0, right: resp.slider_margin_horizontal, bottom: 0, left: resp.slider_margin_horizontal},
+	slider_width = $("#sliders-wrapper").width() - slider_margin.left - slider_margin.right,
+	slider_height = resp.slider_height - slider_margin.top - slider_margin.bottom,
+	slider_handle_width = resp.slider_handle_width;
+
+var svg_slider = d3.select("#sliders-wrapper").append("svg")
+		.attr("width", slider_width + slider_margin.left + slider_margin.right)
+		.attr("height", slider_height + slider_margin.top + slider_margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + slider_margin.left + "," + slider_margin.top + ")");
+
+var slider_scale = d3.scaleLinear()
+		.range([0, slider_width])
+		.domain([0, 100])
+
+var colors = ["#334d5c","#45b29d","#df5a49"];
+
+// magic numbers
+var margin_scatter = {top: 20, bottom: 25, left: 25, right: 10},
+	width_scatter = $("#chart").width() - margin_scatter.left - margin_scatter.right,
+	height_scatter = $("#chart").width() - margin_scatter.top - margin_scatter.bottom;
+
+var svg_scatter = d3.select("#chart").append("svg")
+		.attr("width", width_scatter + margin_scatter.left + margin_scatter.right)
+		.attr("height", height_scatter + margin_scatter.top + margin_scatter.bottom)
+	.append("g")
+		.attr("transform", "translate(" + margin_scatter.left + ", " + margin_scatter.top + ")");
+
+var color_scale_scatter = chroma.scale(['#e66101','#fdb863','#b2abd2','#5e3c99']).domain([-25, 25]);
+
+var xScale_scatter = d3.scaleLinear()
+		.range([0, width_scatter])
+		.domain([0, 100]);
+
+var yScale_scatter = d3.scaleLinear()
+		.range([height_scatter, 0])
+		.domain([0, 100]);
+
+var xAxis_scatter = d3.axisBottom()
+		.scale(xScale_scatter)
+
+var yAxis_scatter = d3.axisLeft()
+		.scale(yScale_scatter)
+
+
+var voronoi = d3.voronoi()
+		.x(function(d) { return xScale_scatter(d.total_pct); })
+		.y(function(d) { return yScale_scatter(d.start_pct); })
+		.extent([[0, 0], [width_scatter, height_scatter]]);
+
+var voronoiGroup = svg_scatter.append("g")
+		.attr("class", "voronoi");
+
+svg_scatter.append("line")
+		.attr("class", "xy-line")
+		.attr("x1", 0)
+		.attr("x2", width_scatter)
+		.attr("y1", height_scatter)
+		.attr("y2", 0)
+		.style("stroke", "#000");
+
+// magic numbers
+var table_body = d3.select("table").append("tbody");
+
 var t = d3.transition()
 		.duration(2000);
 
@@ -358,7 +467,7 @@ function ready(error, data){
 				
 		function make_row(d){
 			var change = d.old_rank - d.new_rank;
-			change = change > 0 ? "+" + change : change
+			change = change > 0 ? "<i style='color:#91cf60' class='fa fa-caret-up' aria-hidden='true'></i></sub> " + change : change == 0 ? change : "<i style='color:#fc8d59' class='fa fa-caret-down' aria-hidden='true'></i></sub> " + (change * -1)
 			return "<td>" + d.city + "</td><td>" + d.new_rank + "</td><td>" + d.old_rank + "</td><td>" + change + "</td>";
 		}
 
@@ -460,10 +569,6 @@ function ready(error, data){
 	}
 
 }
-
-
-
-
 
 function slugify(text)
 {

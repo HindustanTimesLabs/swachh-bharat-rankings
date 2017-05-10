@@ -5,7 +5,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>How to game the Swachh Bharat rankings | Hindustan Times</title>
+	<title>How to game the Swachh Bharat cities rankings | Hindustan Times</title>
+
+	<meta name="keywords" content="Swachh Bharat, Swachh Survekshan, Swachh Bharat cities ranking, Varanasi, Bhubaneswar, Indore, Ministry of Urban Development, Bhopal, Chandigarh, Neemuch, Quality Council of India" />
+ 	<meta name="description" content="The government’s rankings of the cleanest cities in the country had some surprising outcomes. If you change the methology, the rankings change, too."/>
+
+	<meta property="og:url" content="http://www.hindustantimes.com/interactives/swachh-bharat-swachh-survekshan-cities-ranking/" />
+  <meta property="og:title" content="How to game the Swachh Bharat cities rankings" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="The government’s rankings of the cleanest cities in the country had some surprising outcomes. If you change the methology, the rankings change, too." />
+  <meta property="og:image" content="http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/05/07/Pictures/_e32b0a78-32e9-11e7-9a1e-ae80039293d8.jpg" />
+  <meta property="og:image:type" content="image/jpg" />
+  <meta property="og:type" content="website"/>
+   
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@htTweets" />
+  <meta name="twitter:title" content="How to game the Swachh Bharat cities rankings" />
+  <meta name="twitter:description" content="The government’s rankings of the cleanest cities in the country had some surprising outcomes. If you change the methology, the rankings change, too." />
+  <meta name="twitter:image:src" content="http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/05/07/Pictures/_e32b0a78-32e9-11e7-9a1e-ae80039293d8.jpg" />
+
 
 	<!-- favicon -->
   <link rel="shortcut icon" href="http://www.hindustantimes.com/res/img/app-images/HomePageV1/favicon.ico">
@@ -16,11 +34,13 @@
 	<!-- css cdns, use as needs -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.default.min.css" /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/FontAwesome.otf" />
 
-	<link rel="stylesheet" href="css/template.css" />
-	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/template.min.css" />
+	<link rel="stylesheet" href="css/styles.min.css" />
 
 </head>
 <body>
@@ -44,7 +64,7 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="titles-wrapper">
-      <h1 class="headline">How to game the Swachh Bharat rankings</h1>
+      <h1 class="headline">How to game the Swachh Bharat cities rankings</h1>
       <h2 class="byline">By Harry Stevens</h2>
       <hr class="blue-line" />
       <h2 class="dateline">11 May, 2017</h2>
@@ -52,11 +72,14 @@
     <div class="copy">
     	<p>The government&rsquo;s <a href="http://swachh-survekshan.in/">rankings of the cleanest cities in the country</a>, released last week as part of the Swachh Bharat campaign, had some surprising outcomes. &ldquo;Is Varanasi really cleaner than Bhubaneswar?&rdquo; my editor asked in <a href="http://www.hindustantimes.com/columns/varanasi-cleaner-than-bhubaneswar-swachh-survekshan-needs-to-get-better-on-city-ranking/story-Krh2RmbFJ0OEd59zaPNaSM.html">an article earlier this week</a>. Others have asked some version of the same question: How were these rankings produced? And is the methodology sound?</p>
 
-			<p>The rankings consider three broad categories of data: documentation provided by the cities, feedback from citizens, and independent cleanliness inspections. Intuitively, one might think that the independent inspections &mdash; which involve unbiased people observing how clean the city <em>actually</em> is &mdash; would be the most important source of data. But in the way the Ministry of Urban Development calculated the rankings, independent inspections are the least important.</p>
+			<p>The rankings consider three broad categories of data: documentation provided by the cities, feedback from citizens, and independent ground assessments. Intuitively, one might think that the ground assessments &mdash; which involve unbiased people observing how clean the city <em>actually</em> is &mdash; would be the most important source of data. But the way the Ministry of Urban Development calculated the rankings, ground assessments are the least important.</p>
 
-			<p>Instead, 45% of the ranking comes from documentation provided by the cities, 35% comes from citizen feedback, and the remaining 25% is derived from the independent inspections. What if these categories were weighted differently? We&rsquo;ve built a tool that lets you find out. Adjust the weights of the three categories below, and see how the rankings change.</p>
+			<p>Instead, 45% of the ranking comes from documentation provided by the cities, 30% comes from citizen feedback, and the remaining 25% is derived from the ground assessments. What if these categories were weighted differently? We&rsquo;ve built a tool that lets you find out. Adjust the weights of the three categories below, and see how the rankings change.</p>
 
     </div>
+
+
+
 		<div id="sliders-wrapper">
 			<div class="instructions">Use the white handles to adjust the weights.</div>
 			<div class="labels">
@@ -66,48 +89,67 @@
 			</div>
 		</div>
 		<div class="or instructions">Or, use these buttons.</div>
+
+
 		<div class="presets">
 
 			<div class="button" data-button="reset">Reset</div>
 			<div class="button special dox" data-button="dox">Documentation only</div>
 			<div class="button special ground" data-button="ground">Ground assessment only</div>
 			<div class="button special citizen" data-button="citizen">Citizen feedback only</div>
-			<div class="button" data-button="equal">All three are equal</div>
+			<div class="button equal" data-button="equal">All three are equal</div>
+
 		</div>
+
 		
 		<div class="row">
-			<div class="col-md-offset-2 col-md-4">
-				<div class="legend">
-					<p style="margin-bottom: 4px">Each dot represents a city</p>
-					<div class="legend-item"><div style="background: #5e3c99" class="swatch"></div> Score is higher with your weights</div>
-					<div class="legend-item"><div style="background: #e66101" class="swatch"></div> Score is lower with your weights</div>
+			<div class="col-md-offset-2 col-md-4 table-wrapper">
+
+				<div class="city-search">
+					<select placeholder="Select a city..." data-placeholder="Select a city..."></select>
+				</div>
+
+				<div class="view-select">
+					<div class="booton" mutton="chart">View chart</div>
+				</div>
+				<!-- <div class="sentence">Here is where we put a sentence about the rankings</div>	 -->
+				
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>City</th><th>Your rank</th><th>Gov't rank</th><th>Change in rank</th>
+						</tr>
+					</thead>
 					
+				</table>
+				
+			</div>
+			<div class="col-md-4 chart-wrapper">
+				<div class="legend">
+					<p>Each dot represents a city. Hover over a dot to see details for that city.</p>
+					<p class="lh">City scores get <span style="background: #5e3c99" class="swatch">higher with your weights</span> or <span style="background: #e66101" class="swatch">lower with your weights</span>.</p>
 				</div>
 				<div id="chart">
 				</div>
 				
 			</div>
-			<div class="col-md-4">
-					
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>City</th><th>Your rank</th><th>Gov't rank</th><th>Your score</th><th>Gov't score</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				
-			</div>
+
 
 		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<p class="source">SOURCE: <a href="http://swachh-survekshan.in/">Swachh Survekshan 2017</a></p>
+			</div>
+		</div>
 
-
-	</div>
-
-
-
+		<div class="copy">
+			
+			<p>So what if we scrap the documentation and citizen feedback, instead relying entirely on the ground assessment? Bhopal rises to the top of the list, while Indore falls to 11th. Varanasi actually <em>improves</em>, rising from 32nd to 28th, while Bhubaneswar improves from 94th to 70th, still far behind.</p>
+			<p>If we only consiuder citizen feedback, Neemuch, Madhya Pradesh, rises from 136th to the top of the charts. Apparently, Neemuch&rsquo;s citizens think their city is very clean, even if the government and independent assessors disagree. And if only documentation matters, Chandigarh becomes the country&rsquo;s cleanest city, rising from its former rank of 11th.</p>
+			<p>Why did the government choose to weight documentation so heavily? &ldquo;In initial years, you have to push municipalities to do work,&rdquo; said Quality Council of India&rsquo;s Anay Agarwal, who directed the survey project. &ldquo;Even if results are not visible on the ground, they have to be awarded &mdash; in terms of higher ranking &mdash; for starting the work.&ldquo;</p>
+			<p>In other words, by weighting the rankings as it does, the government wants to encourage cities to demonstrate an institutional commitment to staying clean. By this thinking, cities that provide documentation of their clean-up efforts demonstrate a commitment to the process, even if the results have yet to show up on the ground.</p>
+			<p class="contrib">Samarth Bansal contributed to this article.</p>
+		</div>
 
 	<div class="row related-wrapper">
     <div class="col-md-offset-2 col-md-8">
@@ -118,40 +160,40 @@
       </div>
       <div class="row related-links-wrapper">
         <div class="col-md-4 col-sm-4 related-story">
-          <a href="http://www.hindustantimes.com/india-news/finance-bill-minor-legislative-tweaks-prompt-major-fears-for-democracy-s-future/story-YwIAiVs71ZF3pcM4pm94LP.html">
+          <a href="http://www.hindustantimes.com/columns/varanasi-cleaner-than-bhubaneswar-swachh-survekshan-needs-to-get-better-on-city-ranking/story-Krh2RmbFJ0OEd59zaPNaSM.html">
             <div class="row related-story-image-wrapper">
               <div class="col-md-12">
-                <img class="img-responsive" src="http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/04/13/Pictures/parliament-house_fa190fd0-1ff4-11e7-beb7-f1cbdf0743d8.jpg"/>
+                <img class="img-responsive" src="http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/05/07/Pictures/_e32b0a78-32e9-11e7-9a1e-ae80039293d8.jpg"/>
               </div>
             </div>
             <div class="row related-story-headline">
               <div class="col-md-12">
-                Minor legislative tweaks prompt major fears for democracy’s future
+                Swachh Survekshan needs to come clean on city ranking
               </div>
             </div>
             <div class="row related-story-dateline">
               <div class="col-md-12">
-                14 April, 2017
+                7 May, 2017
               </div>
             </div>
           </a>
         </div>
 
         <div class="col-md-4 col-sm-4 related-story">
-          <a href="http://www.hindustantimes.com/analysis/finance-bill-makes-funding-for-political-parties-more-opaque-than-ever/story-5qKRhtDK5qnuzis8JiI9FO.html">
+          <a href="http://www.hindustantimes.com/interactives/cities-since-1901/">
             <div class="row related-story-image-wrapper">
               <div class="col-md-12">
-                <img class="img-responsive" src="http://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2017/03/30/Pictures/praful-gangurde_b172a2c0-14f3-11e7-9d7a-cd3db232b835.jpg"/>
+                <img class="img-responsive" src="http://www.hindustantimes.com/interactives/cities-since-1901/img/cover.jpg"/>
               </div>
             </div>
             <div class="row related-story-headline">
               <div class="col-md-12">
-                Finance bill makes funding for political parties more opaque
+                How India’s cities have grown and shrunk over the last 116 years
               </div>
             </div>
             <div class="row related-story-dateline">
               <div class="col-md-12">
-                2 April, 2017
+                4 May, 2017
               </div>
             </div>
           </a>
@@ -159,20 +201,20 @@
       
 
         <div class="col-md-4 col-sm-4 related-story">
-          <a href="http://www.hindustantimes.com/static/demonetisation-timeline/">
+          <a href="http://www.hindustantimes.com/static/delhi-traffic-race/">
             <div class="row related-story-image-wrapper">
               <div class="col-md-12">
-                <img class="img-responsive" src="img/demon.png"/>
+                <img class="img-responsive" src="http://www.hindustantimes.com/static/delhi-traffic-race/img/social.jpg"/>
               </div>
             </div>
             <div class="row related-story-headline">
               <div class="col-md-12">
-                Demonetisation&rsquo;s ever-changing rules: a complete history
+                You are losing the race against Delhi&rsquo;s traffic
               </div>
             </div>
             <div class="row related-story-dateline">
               <div class="col-md-12">
-                15 September, 2016
+                15 December, 2016
               </div>
             </div>
           </a>
@@ -180,6 +222,12 @@
       </div>
     </div>
   </div>
+
+	</div>
+
+
+
+
 
 
 	<footer class="footer-basic-centered">
@@ -205,9 +253,73 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-	<script src="js/template.js"></script>
-	<script src="js/scatter.js"></script>
-	<script src="js/scripts.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.min.js"></script>
+	<script src="js/template.min.js"></script>
+	<script src="js/scripts.min.js"></script>
+
+<!-- analytics -->
+
+<script type="text/javascript">
+  var _comscore=_comscore || [];
+  _comscore.push({
+    c1 : "2",
+    c2 : "6035286"
+  });
+  (function() {
+    var s=document.createElement("script"), el=document.getElementsByTagName("script")[0];
+    s.async=true;
+    s.src=(document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+
+<script type="text/javascript">
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject']=r;
+    i[r]=i[r] ||
+    function() {
+      (i[r].q=i[r].q || []).push(arguments)
+    }, i[r].l=1 * new Date();
+    a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+    a.async=1;
+    a.src=g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-1431719-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script type='text/javascript'>
+var _sf_async_config=_sf_async_config || {};
+/** CONFIGURATION START **/
+_sf_async_config.uid=63228
+_sf_async_config.domain="hindustantimes.com";
+_sf_async_config.useCanonical=true;
+_sf_async_config.sections='ht-indepth';
+//CHANGE THIS
+_sf_async_config.authors='Harry Stevens';
+//CHANGE THIS
+/** CONFIGURATION END **/
+(function() {
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e=document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+    document.body.appendChild(e);
+  }
+
+  var oldonload=window.onload;
+  window.onload=( typeof window.onload != 'function') ? loadChartbeat : function() {
+    oldonload();
+    loadChartbeat();
+  };
+})();
+</script>
 
 </body>
 </html>

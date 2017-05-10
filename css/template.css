@@ -151,11 +151,11 @@ footer a {
   }
   .titles-wrapper h1 {
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-bottom: 40px;
     line-height: 1.5em;
   }
-  .titles-wrapper h2 {
+  .titles-wrapper h2.byline {
     font-size: 1em;
   }
   .titles-wrapper h2.dateline {
@@ -170,6 +170,7 @@ footer a {
   /*related*/
   .related-wrapper {
     padding: 10px;
+    font-size:.7em;
   }
 }
 

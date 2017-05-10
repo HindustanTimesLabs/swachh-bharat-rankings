@@ -63,6 +63,26 @@
 	color: #fff;
 }
 
+
+.view-select {
+	padding-top: 5px;
+	padding-bottom:20px;
+}
+.view-select .booton {
+	text-align: center;
+	font-size: .8em;
+	width: 100%;
+	color: #888;
+  font-size: 1em;
+	float: left;
+	padding: 6px;
+  border: 1px solid #eee;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+	background: #fff;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
 /*SLIDERS*/
 #sliders-wrapper {
 	width: 100%;
@@ -76,6 +96,9 @@
 	font-size: .9em;
 	text-align: center;
 	margin-bottom: 5px;
+}
+.city-search .instructions {
+	display: none;
 }
 #sliders-wrapper .labels {
 	margin-left: 12px;
@@ -132,16 +155,39 @@
 	text-anchor: middle;
 }
 
-/*TABLE*/
+/*SELECT*/
+.chosen-container.chosen-container-single {
+	height: 30px;
+	margin-bottom: 15px;
+}
+.view-select {
+	display: none;
+}
 
+/*TABLE*/
+.table-wrapper .sentence {
+	margin-bottom: 20px;
+}
 thead {
-	font-size: .8em
+	font-size: .8em;
+}
+th {
+	font-weight: normal;
 }
 tbody {
 	font-size: .7em;
   display: block;
-  height: 470px;
+  height: 400px;
   overflow: auto;
+}
+tbody td .fa {
+	font-size: 1.3em;
+}
+tbody tr td, th {
+	text-align: center;
+}
+tbody tr td:first-of-type, th:first-of-type {
+	text-align: left;
 }
 thead, tbody tr {
   display: table;
@@ -153,6 +199,7 @@ thead {
 }
 .table>thead>tr>th {
 	padding-top: 0px;
+	padding-bottom: 4px;
 }
 
 /*SCATTER CHART*/
@@ -168,19 +215,22 @@ thead {
 	font-family: "Open Sans", sans-serif;
 }
 .axis .l {
-	fill: #000;
-	font-size: 1.5em;
+  fill: #3a403d;
+  font-size: 1.3em;
 }
 .legend {
 	font-size: .8em;
-	color: #888;
 }
-
-.legend .legend-item .swatch {
-	height: 10px;
-	width: 25px;
-	margin-right: 4px;
+.legend p {
+	margin-bottom: 4px;
+}
+.legend .legend-item {
 	display: inline-block;
+}
+.legend .swatch {
+	padding: 1px 3px;
+	color: #fff;
+	border-radius: 3px;
 }
 .voronoi path {
   fill: transparent;
@@ -198,4 +248,67 @@ thead {
 .scatter-line-text {
 	text-shadow: -3px -3px 1px rgba(255, 255, 255, 0.4), -3px -2px 1px rgba(255, 255, 255, 0.4), -3px -1px 1px rgba(255, 255, 255, 0.4), -3px 0px 1px rgba(255, 255, 255, 0.4), -3px 1px 1px rgba(255, 255, 255, 0.4), -3px 2px 1px rgba(255, 255, 255, 0.4), -3px 3px 1px rgba(255, 255, 255, 0.4), -2px -3px 1px rgba(255, 255, 255, 0.4), -2px -2px 1px rgba(255, 255, 255, 0.4), -2px -1px 1px rgba(255, 255, 255, 0.4), -2px 0px 1px rgba(255, 255, 255, 0.4), -2px 1px 1px rgba(255, 255, 255, 0.4), -2px 2px 1px rgba(255, 255, 255, 0.4), -2px 3px 1px rgba(255, 255, 255, 0.4), -1px -3px 1px rgba(255, 255, 255, 0.4), -1px -2px 1px rgba(255, 255, 255, 0.4), -1px -1px 1px rgba(255, 255, 255, 0.4), -1px 0px 1px rgba(255, 255, 255, 0.4), -1px 1px 1px rgba(255, 255, 255, 0.4), -1px 2px 1px rgba(255, 255, 255, 0.4), -1px 3px 1px rgba(255, 255, 255, 0.4), 0px -3px 1px rgba(255, 255, 255, 0.4), 0px -2px 1px rgba(255, 255, 255, 0.4), 0px -1px 1px rgba(255, 255, 255, 0.4), 0px 1px 1px rgba(255, 255, 255, 0.4), 0px 2px 1px rgba(255, 255, 255, 0.4), 0px 3px 1px rgba(255, 255, 255, 0.4), 1px -3px 1px rgba(255, 255, 255, 0.4), 1px -2px 1px rgba(255, 255, 255, 0.4), 1px -1px 1px rgba(255, 255, 255, 0.4), 1px 0px 1px rgba(255, 255, 255, 0.4), 1px 1px 1px rgba(255, 255, 255, 0.4), 1px 2px 1px rgba(255, 255, 255, 0.4), 1px 3px 1px rgba(255, 255, 255, 0.4), 2px -3px 1px rgba(255, 255, 255, 0.4), 2px -2px 1px rgba(255, 255, 255, 0.4), 2px -1px 1px rgba(255, 255, 255, 0.4), 2px 0px 1px rgba(255, 255, 255, 0.4), 2px 1px 1px rgba(255, 255, 255, 0.4), 2px 2px 1px rgba(255, 255, 255, 0.4), 2px 3px 1px rgba(255, 255, 255, 0.4), 3px -3px 1px rgba(255, 255, 255, 0.4), 3px -2px 1px rgba(255, 255, 255, 0.4), 3px -1px 1px rgba(255, 255, 255, 0.4), 3px 0px 1px rgba(255, 255, 255, 0.4), 3px 1px 1px rgba(255, 255, 255, 0.4), 3px 2px 1px rgba(255, 255, 255, 0.4), 3px 3px 1px rgba(255, 255, 255, 0.4);
 	font-size: .9em;
+}
+
+.contrib {
+	font-style: italic;
+	margin-top: 50px;
+}
+
+.source {
+	margin-top: 20px;
+	font-size: .8em;
+	color: #888;
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+	#sliders-wrapper {
+		margin-bottom: 0px;
+	}
+	#sliders-wrapper .labels {
+		margin: 0px;
+		font-size: .75em;
+	}
+	select {
+		margin-left: 1%;
+		width: 98%;
+		font-size: .9em;
+	}
+	.instructions {
+		/*display: none;*/
+		margin-bottom: 0px;
+	}
+	.presets {
+		height: 40px;
+	}
+	.presets .button {
+		font-size: .75em;
+		padding: 8px 6px;
+	}
+
+	.view-select {
+		display: block;
+		z-index: 20;
+		height:50px
+	}
+	.view-select .booton {
+		cursor: pointer;
+	}
+
+	.scatter-line-text {
+		text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+	}
+
+	.lh {
+		line-height: 1.7em
+	}
+
+}
+@media only screen and (max-width: 480px) {
+	.or.instructions {
+		display: none;
+	}
+
 }

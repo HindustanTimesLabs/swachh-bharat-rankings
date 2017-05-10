@@ -1,6 +1,6 @@
 // meta tags
-var twitterStatus = '';
-var hashtags = '';
+var twitterStatus = 'Find out how to game the Swachh Bharat cities rankings';
+var hashtags = 'HTData';
 
 $(document).ready(function(){
   // calc breakpoint
