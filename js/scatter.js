@@ -1,7 +1,7 @@
 // magic numbers
 var margin_scatter = {top: 20, bottom: 25, left: 25, right: 10},
-	width_scatter = 450 - margin_scatter.left - margin_scatter.right,
-	height_scatter = 450 - margin_scatter.top - margin_scatter.bottom;
+	width_scatter = $("#chart").width() - margin_scatter.left - margin_scatter.right,
+	height_scatter = $("#chart").width() - margin_scatter.top - margin_scatter.bottom;
 
 var svg_scatter = d3.select("#chart").append("svg")
 		.attr("width", width_scatter + margin_scatter.left + margin_scatter.right)
@@ -25,6 +25,15 @@ var xAxis_scatter = d3.axisBottom()
 var yAxis_scatter = d3.axisLeft()
 		.scale(yScale_scatter)
 
+
+var voronoi = d3.voronoi()
+		.x(function(d) { return xScale_scatter(d.total_pct); })
+		.y(function(d) { return yScale_scatter(d.start_pct); })
+		.extent([[0, 0], [width_scatter, height_scatter]]);
+
+var voronoiGroup = svg_scatter.append("g")
+		.attr("class", "voronoi");
+
 svg_scatter.append("line")
 		.attr("class", "xy-line")
 		.attr("x1", 0)
@@ -32,14 +41,3 @@ svg_scatter.append("line")
 		.attr("y1", height_scatter)
 		.attr("y2", 0)
 		.style("stroke", "#000");
-
-// d3.queue()
-// 		.defer(d3.csv, "data/data.csv")
-// 		.await(ready);
-
-// function ready(error, data){
-// 	if (error) throw error;
-
-// 	console.log(data);
-
-// }
