@@ -459,12 +459,12 @@ function ready(error, data){
 				.attr("cx", function(d){ return xScale_scatter(d.total_pct); })
 				.attr("cy", function(d){ return yScale_scatter(d.start_pct); })
 				.attr("fill", function(d){ return color_scale_scatter(d.total_pct - d.start_pct)})
-				.on("mouseover", mouseover)
+				.on("mouseover", function(d){ mouseover(d, false) })
 				.on("mouseout", mouseout)
 
 		scatter_voronoi.enter().append("path")
 				.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; })
-				.on("mouseover", function(d){ mouseover(d.data); })
+				.on("mouseover", function(d){ mouseover(d.data, false); })
 				.on("mouseout", mouseout)
 				
 		function make_row(d){
@@ -540,6 +540,7 @@ function ready(error, data){
 			$(".scatter-line").remove();
 			$(".scatter-line-text").remove();
 			$(".city-dot").removeClass("highlight");
+			
 
 			var node_name = $(elementMouseIsOver)[0] == undefined ? "" : $(elementMouseIsOver)[0].nodeName ;
 		
